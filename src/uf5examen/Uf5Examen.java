@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -49,9 +50,13 @@ public class Uf5Examen {
                 Pelicula tPelicula = new Pelicula(tTitulo, tFecha, tActores);
                 todasPeliculas.put(tTitulo, tPelicula);
                 System.out.println("Introducido en el HashMap: " + tPelicula);
+                
+                
             }
             System.out.println(todasPeliculas);
+            
             System.out.println("-------------------------------------");
+            
             System.out.println("Tryout de salida con xml");
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
@@ -71,6 +76,20 @@ public class Uf5Examen {
             DOMSource origen = new DOMSource(documentOut);
             StreamResult desti = new StreamResult(new File("src/test.xml"));
             transformer.transform(origen, desti);
+            
+            System.out.println("-------------------------------------");
+            System.out.println("Tryout de treeset");
+            Set<String> claus = todasPeliculas.keySet();
+            
+            TreeSet<String> clausOrdenades = new TreeSet(claus);
+            
+            for (String clau : clausOrdenades) {
+                System.out.printf("%-10s%10s\n", clau, todasPeliculas.get(clau));
+            }
+            
+            System.out.println("-------------------------------------");
+            
+            
             System.out.println("-------------------------------------");
         } catch (Exception e) {
             System.out.println(e);
